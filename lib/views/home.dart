@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+String selectedCategory = "Adults";
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   List<String> categories = [
     "Adults",
     "Children",
     "Women",
     "Men",
   ];
-  String selectedCategory = "Adults";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +75,7 @@ class HomePage extends StatelessWidget {
                     return CategoriesTile(
                       category: categories[index],
                       isSelected: selectedCategory == categories[index],
+                      context: this,
                     );
                   }),
             ),
@@ -81,12 +89,13 @@ class HomePage extends StatelessWidget {
 class CategoriesTile extends StatefulWidget {
   String category;
   bool isSelected;
+  _HomePageState context;
 
   CategoriesTile({
     this.category,
     this.isSelected,
+    this.context,
   });
-
   @override
   _CategoriesTileState createState() => _CategoriesTileState();
 }
@@ -96,8 +105,8 @@ class _CategoriesTileState extends State<CategoriesTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          // selectedCategory = widget.category;
+        widget.context.setState(() {
+          selectedCategory = widget.category;
         });
       },
       child: Container(
