@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../model/speciality.dart';
+import '../data/data.dart';
+import '../widgets/specialists_tile.dart';
+import '../widgets/doctors_tile.dart';
+
 String selectedCategory = "Adults";
 
 class HomePage extends StatefulWidget {
@@ -14,12 +19,20 @@ class _HomePageState extends State<HomePage> {
     "Women",
     "Men",
   ];
+  List<SpecialityModel> speciality;
+
+  @override
+  void initState() {
+    super.initState();
+    speciality = getSpeciality();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 24),
+        color: Colors.white,
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -67,18 +80,50 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: 30,
               child: ListView.builder(
-                  itemCount: categories.length,
+                itemCount: categories.length,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return CategoriesTile(
+                    category: categories[index],
+                    isSelected: selectedCategory == categories[index],
+                    context: this,
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 250,
+              child: ListView.builder(
+                  itemCount: speciality.length,
                   shrinkWrap: true,
                   physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return CategoriesTile(
-                      category: categories[index],
-                      isSelected: selectedCategory == categories[index],
-                      context: this,
+                    return SpecialistTile(
+                      imgAssetPath: speciality[index].imgAssetPath,
+                      speciality: speciality[index].speciality,
+                      number: speciality[index].numberOfDoctors,
+                      backgroundColor: speciality[index].backgroundColor,
                     );
                   }),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Doctors',
+              style: TextStyle(
+                  color: Colors.black87.withOpacity(0.8),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 20),
+            DoctorsTile(),
           ],
         ),
       ),
