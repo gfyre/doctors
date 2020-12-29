@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../model/speciality.dart';
 import '../data/data.dart';
+import '../widgets/specialists_tile.dart';
+import '../widgets/doctors_tile.dart';
 
 String selectedCategory = "Adults";
 
@@ -166,116 +169,6 @@ class _CategoriesTileState extends State<CategoriesTile> {
             color: widget.isSelected ? Color(0xffFc9535) : Color(0xffA1A1A1),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class SpecialistTile extends StatelessWidget {
-  String imgAssetPath;
-  String speciality;
-  int number;
-  Color backgroundColor;
-
-  SpecialistTile({
-    @required this.imgAssetPath,
-    @required this.speciality,
-    @required this.number,
-    @required this.backgroundColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: 150,
-        margin: EdgeInsets.only(right: 20),
-        padding: EdgeInsets.only(
-          top: 16,
-          right: 16,
-          left: 16,
-        ),
-        decoration: BoxDecoration(
-            color: backgroundColor, borderRadius: BorderRadius.circular(24)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              speciality,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(height: 6),
-            Text(
-              "$number Doctors",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-              ),
-            ),
-            Image.asset(
-              imgAssetPath,
-              height: 163, //originally 160
-              fit: BoxFit.fitHeight,
-            ),
-          ],
-        ));
-  }
-}
-
-class DoctorsTile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xffFFEEE0),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 18,
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            "assets/doctor_pic.png",
-            height: 50,
-          ),
-          SizedBox(width: 15),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Dr Stephani Albert",
-                style: TextStyle(
-                  color: Color(0xffFC9535),
-                  fontSize: 18,
-                ),
-              ),
-              SizedBox(height: 4),
-              Text("Cough and Cold"),
-            ],
-          ),
-          Spacer(),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
-            ),
-            decoration: BoxDecoration(
-                color: Color(0xffFBB97C),
-                borderRadius: BorderRadius.circular(14)),
-            child: Text(
-              "Call",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
