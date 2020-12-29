@@ -97,7 +97,7 @@ class _CategoriesTileState extends State<CategoriesTile> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          selectedCategory = widget.category;
+          // selectedCategory = widget.category;
         });
       },
       child: Container(
